@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let window = self.window {
             launchCoordinator.setRoot(for: window)
         }
-        
+        self.window?.backgroundColor = .white
         self.window?.makeKeyAndVisible()
         return true
     }

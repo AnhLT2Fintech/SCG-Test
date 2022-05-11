@@ -16,7 +16,7 @@ enum NewsTargetType {
 extension NewsTargetType: TargetType {
     
     static let baseURL = "https://newsapi.org/v2"
-    static let apiKey = "cbf6678a44734108bfef6a6a27e4d0b0"
+    static let apiKey = "4c30e9551cc841eda20e91feba794814"
     static let pageSize = 10
     
     var baseURL: URL {
