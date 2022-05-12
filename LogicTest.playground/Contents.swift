@@ -6,52 +6,34 @@ func findIndexOfPivod(_ array: [Int]?) -> String {
         return "index not found"
     }
     
-    //MARK: - Option 1
-//    var leftIndex: Int = 0
-//    var rightIndex: Int = validArray.count - 1
-//    var leftSum: Int = validArray[leftIndex]
-//    var rightSum: Int = validArray[rightIndex]
-//// Sum the elements from left to right in turn until the sum is equal or iterate through the array
-//    while leftIndex < rightIndex {
-//        if leftSum == rightSum, leftIndex + 2 == rightIndex {
-//            leftIndex += 1
-//            return "middle index is \(leftIndex)"
-//        }
-//
-//        if leftSum < rightSum {
-//            leftIndex += 1
-//            leftSum += validArray[leftIndex]
-//        } else {
-//            rightIndex -= 1
-//            rightSum += validArray[rightIndex]
-//        }
-//    }
-//
-//    return "index not found";
-   
-    //MARK: - Option 2
-    var leftSum: Int = 0
-    var rightSum: Int = 0
     let lastIndex = validArray.count - 1
-
-    // Check each element of the array in turn and sum the elements to the right and left of the element you are checking
+    var leftSum: [Int] = validArray
+    var rightSum: [Int] = validArray
+    
+    leftSum[0] = validArray[0]
+    rightSum[lastIndex] = validArray[lastIndex]
+    
+//    Check each element of the array in turn and sum the elements to the right and left of the element you are checking
+    var currentIndex = 1
+    while currentIndex < lastIndex {
+        let sum = leftSum[currentIndex - 1] + validArray[currentIndex]
+        leftSum[currentIndex] = sum
+        currentIndex += 1
+    }
+    
+    currentIndex = lastIndex - 1
+    while currentIndex > 0 {
+        let sum = rightSum[currentIndex + 1] + validArray[currentIndex]
+        rightSum[currentIndex] = sum
+        currentIndex -= 1
+    }
+    
     for i in 1..<lastIndex {
-        leftSum = 0
-        for j in 0..<i {
-            leftSum += validArray[j]
-        }
-        
-        rightSum = 0
-        for j in (i + 1)...lastIndex {
-            rightSum += validArray[j]
-        }
-        
-        if leftSum == rightSum {
+        if leftSum[i] == rightSum[i] {
             return "middle index is \(i)"
         }
     }
-    
-    return "index not found";
+    return "index not found"
 }
 
 func detectPalindromeString(_ string: String?) -> String {
